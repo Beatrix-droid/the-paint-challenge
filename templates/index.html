@@ -23,24 +23,30 @@
     <li>Half Gallon (1.89L)</li>
     <li>Gallon (3.79L)</li>
     <li>5 Gallon (18.93L)</li>
+
 </ul>
 
 
-<p>Enter the width and length the walls you want to paint and 
-the calculator will return the cheapest combinations of paint cans
-you will have to purchase to get the job done.
-</p>
 </section>
 </div>
 
 <div class="form-container">
-<form>
-    <label>Enter Width:<input required type="number" placeholder="width in meters"></label>
-    <label>Enter Length:<input required type="number" placeholder="length in meters"></label>
+<form action="#" method="post">
+    <label>Enter Width:<input required type="number" name="width" placeholder="width in meters"></label>
+    <label>Enter Length:<input required type="number" name="length" placeholder="length in meters"></label>
     <input type="submit" value="submit">
 
 </form>
 </div>
+{% with messages = get_flashed_messages()%}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+{%endwith %}
 
 </body>
 </html>
