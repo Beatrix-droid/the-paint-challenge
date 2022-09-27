@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from paint import get_surface_area
+from paint import get_surface_area, get_litres, get_cans, sort_sizes, needed_cans, paint_prices, paint_sizes
 import os
 from dotenv import load_dotenv
 
@@ -18,7 +18,9 @@ def hello_world():
         obstacle_length = float(request.form['obstacle_length'])
 
         area = get_surface_area(width, length) - get_surface_area(obstacle_width, obstacle_length)
-        flash(area)
+        litres_needed = get_litres(area)
+        cans_needed = get_cans(litres_needed)
+        flash(cans_needed)
     return render_template("index.html")
 
 

@@ -15,9 +15,11 @@
 
 # a dict containing the sizes of paint cans and how many litres of paint they can hold
 
-
+#average price of paint is 18.08£ and it was obtained by computing the average of the following list that
+# contians a range of various Uk paints priced per litre
 list = [13.99,13.49,15.99,8.00, 18.99,38.00 ]
-#average price per litre of paint is 18.08
+
+#A dictionary of the most common paint tub sizes and there volume per litre was computed
 
 paint_sizes= {"Half Pint": 0.24,
                 "Pint": 0.47, 
@@ -26,7 +28,9 @@ paint_sizes= {"Half Pint": 0.24,
                 "Gallon": 3.79,
                 "5 Gallon": 18.93}
 
-#generated from the average price of paint per litre in pounds
+#using teh above dictionary and the average cost of paint in the uk, a list of average prices of paint per
+#tub size was calculated
+
 paint_prices={"Half Pint": 4.34,
                 "Pint": 8.5, 
                 'Quart': 17.18,
@@ -34,10 +38,12 @@ paint_prices={"Half Pint": 4.34,
                 "Gallon": 68.52,
                 "5 Gallon": 342.25}
                 
+#a dict that will hold all the tubs we need to paint a wall
+needed_cans = {}
 
 
 
-
+#helper functions that will aid us in the main computation
 
 def get_surface_area(height: float, width: float) -> float:
 
@@ -76,40 +82,50 @@ def sort_sizes(dictionary: dict, litres: float) -> list:
     return  val_list
 
 
+
 def get_cans(total_litres: float) -> dict:
 
-    """ A function that returns the number of cans needed to paint a wall in a dict"""
+    """ A function that accepts an integer representing
+    litres of paint and returns the cheapest way of buying that many litres of paint according to the above 
+    price listing"""
 
-    # a list that will give us the total set  of cans we need to paint a wall
-    needed_cans = {}
+    
+   
+    #Case 1: Litres needed is less than smallest can.
+    if total_litres < 0.47:
+        small_cans= total_litres//0.24
+        needed_cans["Half Pint"]=needed_cans.get("Half Pint", 0)
+        needed_cans["Half Pint"]+= small_cans
+        total_litres =total_litres- small_cans*0.24
 
-    #consider edge cases first. Litres needed is less than smallest can.
-    if total_litres < paint_sizes["Half Pint"]:
-        needed_cans["Half Pint"]=needed_cans.get("Half Pint", 1) 
+        #if total_litres != 0:
+        ##call function recursively here
+          #  get_cans(total_litres)
         return needed_cans
     
-    #assume that the paint needed happens to be exactly the one in the dict
+    #Case 2: the ammount of litres needed happens to be exactly the dimensions of one tub
     for key, value in paint_sizes.items():
         if value == total_litres:
             needed_cans[key] = needed_cans.get(key,1)
             return needed_cans
 
-    #assume that paint needed is more than 5 gallons:
+    #Case3: the paint needed is more than 5 gallons:
     if total_litres > 18.93:
         #find out how many large paint cans we need:
         large_paint_cans_needed = total_litres//18.93
         needed_cans['5 Gallon'] = large_paint_cans_needed
 
         #subtract paint that was covered from the large paint cans from total beginning paint
-        total_litres =- (total_litres * large_paint_cans_needed)
-        if total_litres == 0:
-            return needed_cans
+        total_litres = total_litres - (18.93 * large_paint_cans_needed)
+        
+        if total_litres != 0:
         #call function recursively here
-        get_cans(total_litres)
+            get_cans(total_litres)
+        return needed_cans
 
-    #main case: litres of paint needed is a volume in between the sizes displayed.
+    #Case 4: litres of paint needed is a volume in between the sizes displayed.
 
-    if (total_litres not in paint_sizes.values()) and total_litres < 18.93:
+    if (total_litres not in paint_sizes.values()) and (0.24 < total_litres < 18.93):
         #apply sorting function
         val_list = sort_sizes(paint_sizes, total_litres)
 
@@ -118,18 +134,24 @@ def get_cans(total_litres: float) -> dict:
         index_of_our_litres = val_list.index(total_litres)
 
         #and get the key paint can sizes dictionary by value
-        
         can_size = val_list[index_of_our_litres-1]
-        can_amount = total_litres / can_size
-      #  for key, value in paint_sizes.items():
-       #     if value == can_size:
-        #        needed_cans[key] = needed_cans.get(key,0)
-         #       needed_cans[key] += can_amount
-          #      val_list.remove(total_litres)        
-        #get_cans(total_litres)
+        can_amount = total_litres // can_size
+        for key, value in paint_sizes.items():
+            if value == can_size:
+                needed_cans[key] = needed_cans.get(key,0)
+                needed_cans[key] += can_amount
+                val_list.remove(total_litres)
+                #removing the litres covered by the can from the total litres remaining
+
+                total_litres = total_litres - (can_amount*can_size) 
+                if total_litres != 0:       
+                    get_cans(total_litres)
+                return needed_cans
 
 
+sa =get_surface_area(2,3)
 
-sa =get_surface_area(2,40)
 litres = get_litres(sa)
+print(sa, litres)
+
 print(get_cans(litres))
