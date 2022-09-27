@@ -24,6 +24,7 @@ h1{
 
 
 .form-container{
+    padding:1em;
     width: 80%;
     margin:auto;
 }
@@ -34,6 +35,8 @@ ul {
 }
 
 h3{
+    margin:auto;
+    width:80%;
     text-align: center;
     color:rgb(255,0,0);
     padding:7px;
@@ -52,7 +55,7 @@ p{
 }
 section{
     background-color: rgb(255,255,255);
-    opacity: 0.8;
+    opacity: 0.9;
     border-radius: 10px;
     
 }
@@ -62,7 +65,7 @@ form{
     margin:auto;
     border-radius: 5px; 
     background-color: rgb(255,255,255);
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 
@@ -79,4 +82,13 @@ input{
     width: 60%;
     margin-left:auto;
     margin-right:auto;
+}
+
+.answer-container{
+    padding: 1em;
+    width: 80%;
+    margin:auto;
+    border-radius: 5px; 
+    background-color: rgb(255,255,255);
+    opacity: 0.9;
 }

@@ -15,14 +15,14 @@
 <div class="list-container">
 <section>
     <ul>
-        <h3>List of available paint sizes:</h3>
-
-    <li> Half Pint (0.24L)</li>
-    <li> Pint (0.47L)</li>
-    <li>Quart (0.95L)</li>
-    <li>Half Gallon (1.89L)</li>
-    <li>Gallon (3.79L)</li>
-    <li>5 Gallon (18.93L)</li>
+        <h3>List of available paint sizes in litres (L) and their respective price (in £):</h3>
+     
+    <li> Half Pint: (0.24L, 4.34£)</li>
+    <li> Pint: (0.47L, 8.5£)</li>
+    <li>Quart: (0.95L, 17.18£)</li>
+    <li>Half Gallon: (1.89L, 34.17£)</li>
+    <li>Gallon: (3.79L, 68.52£)</li>
+    <li>5 Gallon: (18.93L, 342.25£)</li>
 
 </ul>
 
@@ -32,19 +32,24 @@
 
 <div class="form-container">
 <form action="#" method="post">
-    <label>Enter Width:<input required type="number" name="width" placeholder="width in meters"></label>
-    <label>Enter Length:<input required type="number" name="length" placeholder="length in meters"></label>
+    <label>Enter Wall Width:<input required type="number" min="0" name="width" placeholder="wall width in meters"></label>
+    <label>Enter Wall Length:<input required type="number" min="0" name="length" placeholder=" wall length in meters"></label>
+    <label>Enter Obstacle Width (enter 0 if no obstacle):<input required type="number" value=0 min="0" name="obstacle_width" placeholder="obstacle width in meters"></label>
+    <label>Enter Obstacle Length (enter 0 if no obstacle):<input required type="number" value=0 min="0" name="obstacle_length" placeholder=" obstacle length in meters"></label>
     <input type="submit" value="submit">
 
 </form>
 </div>
+
 {% with messages = get_flashed_messages()%}
 {% if messages %}
+<div class="answer-container">
 <ul class=flashes>
     {% for message in messages %}
         <li>{{ message }}</li>
     {% endfor %}
     </ul>
+</div>
     {% endif %}
 {%endwith %}
 
