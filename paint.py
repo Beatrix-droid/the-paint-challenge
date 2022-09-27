@@ -71,7 +71,7 @@ def get_litres(surface_area: float) -> float:
     return total_litres
 
 
-def sort_sizes(dictionary: dict, litres: float) -> list:
+def sort_sizes(dictionary: dict[str, float], litres: float) -> list:
     
     """Returns a list of values from a dic. It inserts the value of 'liters'
     in the list of values, and returns the new list of values sorted in asceding order"""
@@ -88,7 +88,7 @@ def sort_sizes(dictionary: dict, litres: float) -> list:
 
 
 
-def get_cans(total_litres: float) -> dict:
+def get_cans(total_litres: float) -> dict[str, float]:
 
     """ A function that accepts an integer representing
     litres of paint and returns the cheapest way of buying that many litres of paint according to the above 
@@ -153,9 +153,30 @@ def get_cans(total_litres: float) -> dict:
                 return needed_cans
 
 
-sa =get_surface_area(2,3)
+def merge_dictionaries(dict_1: dict[str,float], dict_2:dict[str, float] ) -> dict[str, list]:
+    
+    """A function that accepts two dictionaries together, combining the value of each key value pair 
+    in a list"""
 
-litres = get_litres(sa)
-print(sa, litres)
+    dict_3 = {**dict_1, **dict_2}
+    for key, value in dict_3.items():
+        if key in dict_1 and key in dict_2:
+            dict_3[key] = [value , dict_1[key]]
+    return dict_3
 
-print(get_cans(litres))
+
+def get_price(dict_3: dict[str, list]) -> float:
+    
+    """A function that accepts a dictionary with lists of length two (containing 
+    just integers) as as values pair"""
+    prices_of_cans = []
+    for value in dict_3.values():
+        prices_of_cans.append(value[0]*value[1])
+    total_price = sum(prices_of_cans)
+    return total_price
+
+sa = get_surface_area(3,4)
+litre = get_litres(sa)
+cans = get_cans(litre)
+dict3 = merge_dictionaries(cans, paint_prices)
+print(sa, cans, litre, dict3, get_price(dict3))

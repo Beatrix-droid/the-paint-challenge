@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from paint import get_surface_area, get_litres, get_cans, sort_sizes, needed_cans, paint_prices, paint_sizes
+from paint import get_surface_area, get_litres, get_cans, merge_dictionaries, paint_prices, get_price
 import os
 from dotenv import load_dotenv
 
@@ -20,7 +20,9 @@ def hello_world():
         area = get_surface_area(width, length) - get_surface_area(obstacle_width, obstacle_length)
         litres_needed = get_litres(area)
         cans_needed = get_cans(litres_needed)
-        flash(cans_needed)
+        dict_3 = merge_dictionaries(cans_needed, paint_prices)
+        total_price = get_price(dict_3)
+        flash(total_price/2)
     return render_template("index.html")
 
 
