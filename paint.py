@@ -39,7 +39,12 @@ paint_prices={"Half Pint": 4.34,
                 "5 Gallon": 342.25}
                 
 #a dict that will hold all the tubs we need to paint a wall
-needed_cans = {}
+needed_cans = {"Half Pint": 0,
+                "Pint": 0, 
+                'Quart': 0,
+                "Half Gallon": 0,
+                "Gallon": 0,
+                "5 Gallon": 0}
 
 
 
@@ -94,19 +99,19 @@ def get_cans(total_litres: float) -> dict:
     #Case 1: Litres needed is less than smallest can.
     if total_litres < 0.47:
         small_cans= total_litres//0.24
-        needed_cans["Half Pint"]=needed_cans.get("Half Pint", 0)
         needed_cans["Half Pint"]+= small_cans
         total_litres =total_litres- small_cans*0.24
 
-        #if total_litres != 0:
-        ##call function recursively here
-          #  get_cans(total_litres)
+        if total_litres != 0:
+        #call function recursively here
+            needed_cans["Half Pint"]+= small_cans
+
         return needed_cans
     
     #Case 2: the ammount of litres needed happens to be exactly the dimensions of one tub
     for key, value in paint_sizes.items():
         if value == total_litres:
-            needed_cans[key] = needed_cans.get(key,1)
+            needed_cans[key] += 1
             return needed_cans
 
     #Case3: the paint needed is more than 5 gallons:
@@ -138,7 +143,6 @@ def get_cans(total_litres: float) -> dict:
         can_amount = total_litres // can_size
         for key, value in paint_sizes.items():
             if value == can_size:
-                needed_cans[key] = needed_cans.get(key,0)
                 needed_cans[key] += can_amount
                 val_list.remove(total_litres)
                 #removing the litres covered by the can from the total litres remaining
