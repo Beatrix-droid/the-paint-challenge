@@ -47,8 +47,11 @@
 {% if messages %}
 <div class="answer-container">
 <ul class=flashes>
+    <li>The number of different tubs needed and their price is:</li>
     {% for message in messages %}
-        <li>{{ message }}</li>
+        {% for key, value in message.items() %}
+            <li>{{key}}: {{value}}</li>
+                {% endfor %}    
     {% endfor %}
     </ul>
 </div>

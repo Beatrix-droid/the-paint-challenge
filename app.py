@@ -24,7 +24,7 @@ def hello_world():
         new_dict={key:((cans_needed[key])/2) for key in cans_needed}
         dict_3 = merge_dictionaries(new_dict, paint_prices)
         total_price = get_price(dict_3)
-        new_dict["total price"] =total_price
+        new_dict["Total Price"] =f"{total_price}£"
         flash(new_dict)
     return render_template("index.html")
 

@@ -176,6 +176,7 @@ def get_price(dict_3: dict[str, list]) -> float:
     return total_price
 
 sa = get_surface_area(3,4)
+sa = sa*3
 litre = get_litres(sa)
 cans = get_cans(litre)
 dict3 = merge_dictionaries(cans, paint_prices)
