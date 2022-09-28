@@ -1,11 +1,12 @@
+
+
 body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin: 0;
     background-image: url('paint.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
 }
 
 .title{
@@ -57,7 +58,6 @@ section{
     background-color: rgb(255,255,255);
     opacity: 0.9;
     border-radius: 10px;
-    
 }
 
 form{
@@ -92,3 +92,4 @@ input{
     background-color: rgb(255,255,255);
     opacity: 0.9;
 }
+

@@ -17,6 +17,15 @@ def hello_world():
         obstacle_width = float(request.form['obstacle_width'])
         obstacle_length = float(request.form['obstacle_length'])
         coat_number = float(request.form['coat_number'])
+        
+        #check if customer imputted any base options
+        base_options = request.form["base_options"]
+        if base_options == "yes":
+            coat_number += 1
+        #check if customer imputted any top options
+        top_options = request.form["top_options"]
+        if top_options == "yes":
+            coat_number += 1
 
         area = coat_number*(get_surface_area(width, length) - get_surface_area(obstacle_width, obstacle_length))
         litres_needed = get_litres(area)
