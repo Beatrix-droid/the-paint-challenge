@@ -67,7 +67,7 @@ def get_litres(surface_area: float) -> float:
     as a parameter and returns the number of litres used 
     to paint that surface area"""
 
-    total_litres = surface_area/6.5
+    total_litres = surface_area/10
     return total_litres
 
 
@@ -174,10 +174,3 @@ def get_price(dict_3: dict[str, list]) -> float:
         prices_of_cans.append(value[0]*value[1])
     total_price = sum(prices_of_cans)
     return total_price
-
-sa = get_surface_area(3,4)
-sa = sa*3
-litre = get_litres(sa)
-cans = get_cans(litre)
-dict3 = merge_dictionaries(cans, paint_prices)
-print(sa, cans, litre, dict3, get_price(dict3))

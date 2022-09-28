@@ -40,8 +40,9 @@ def hello_world():
             coat_number += 1
 
         
-        
-        area = coat_number*(total_wall_area - total_obstacle_area)
+        #accounts for 10% wasteage
+        area = coat_number*(total_wall_area(1+0.1) - total_obstacle_area)
+    
         if area <= 0:
             subtitle = {"Obstacle area can't be bigger than area to paint.": "Please make sure that you have entered the data correctly."}
             flash(subtitle)
