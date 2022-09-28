@@ -31,15 +31,13 @@
 </div>
 
 <div class="form-container">
-<form action="#" method="post">
-    <label>Enter Wall Width:<input required type="number" min="0" name="width" placeholder="wall width in meters"></label>
-    <br>
-    <label>Enter Wall Length:<input required type="number" min="0" name="length" placeholder=" wall length in meters"></label>
-    <br>
-    <label>Enter Obstacle Width (1 by default):<input required type="number" value=0 min="0" name="obstacle_width" placeholder="obstacle width in meters"></label>
-    <br>
-    <label>Enter Obstacle Length (1 by default):<input required type="number" value=0 min="0" name="obstacle_length" placeholder=" obstacle length in meters"></label>
-    <br>
+    <label class="dynamic">Enter number of walls you wish to paint<input type="number" min="1" name="" id="num" placeholder="enter number of walls"></label>
+    <button class="dynamic-button" onclick="func()">click</button>
+    
+    <form action="#" method="post">
+        <div id="inputs"></div>
+    
+
     <label>Enter number of coats you wish to paint (1 by default):<input required type="number" value=1 min="1" name="coat_number" placeholder=" number of coats"></label>
     <br>
     <label>Do you want to include a base coat?</label><input type="radio" class="inline" name="base_options" value="yes" id="option1">Yes<input type="radio" name="base_options" value="no" id="option2">No</label>
@@ -67,5 +65,21 @@
     {% endif %}
 {%endwith %}
 
+
+
+
+
+<script>
+    function func(){
+        var num = document.getElementById("num").value
+        for (i=0; i<num ;i++){
+            document.getElementById("inputs").innerHTML +='<label>Enter Wall Width:<input required type="number" min="0" name="width" placeholder="wall width in meters"></label> <br>';
+            document.getElementById("inputs").innerHTML +='<label>Enter Wall Length:<input required type="number" min="0" name="length" placeholder=" wall length in meters"></label><br>';
+            document.getElementById("inputs").innerHTML +='<label>Enter Obstacle Width (1 by default):<input required type="number" value=0 min="0" name="obstacle_width" placeholder="obstacle width in meters"></label><br>' ;   
+            document.getElementById("inputs").innerHTML +='<label>Enter Obstacle Length (1 by default):<input required type="number" value=0 min="0" name="obstacle_length" placeholder=" obstacle length in meters"></label><br>';
+        }
+    }
+
+</script>
 </body>
 </html>
