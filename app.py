@@ -16,13 +16,16 @@ def hello_world():
         length = float(request.form["length"])
         obstacle_width = float(request.form['obstacle_width'])
         obstacle_length = float(request.form['obstacle_length'])
+        coat_number = float(request.form['coat_number'])
 
-        area = get_surface_area(width, length) - get_surface_area(obstacle_width, obstacle_length)
+        area = coat_number*(get_surface_area(width, length) - get_surface_area(obstacle_width, obstacle_length))
         litres_needed = get_litres(area)
         cans_needed = get_cans(litres_needed)
-        dict_3 = merge_dictionaries(cans_needed, paint_prices)
+        new_dict={key:((cans_needed[key])/2) for key in cans_needed}
+        dict_3 = merge_dictionaries(new_dict, paint_prices)
         total_price = get_price(dict_3)
-        flash(total_price/2)
+        new_dict["total price"] =total_price
+        flash(new_dict)
     return render_template("index.html")
 
 
